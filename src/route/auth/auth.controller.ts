@@ -25,18 +25,18 @@ class AuthController extends AbstractController {
     }
   );
 
-  public signGoogle = this.assyncWrapper.wrap(
-    this.validator.loginGoogle,
-    async (req: Request, res: Response) => {
-      const data = await this.services.signGoogle(req, res);
+  // public signGoogle = this.assyncWrapper.wrap(
+  //   this.validator.loginGoogle,
+  //   async (req: Request, res: Response) => {
+  //     const data = await this.services.signGoogle(req, res);
 
-      if (data.success) {
-        res.status(200).json(data);
-      } else {
-        this.error('login error');
-      }
-    }
-  );
+  //     if (data.success) {
+  //       res.status(200).json(data);
+  //     } else {
+  //       this.error('login error');
+  //     }
+  //   }
+  // );
 
   public signUp = this.assyncWrapper.wrap(
     this.validator.signUp,
@@ -64,44 +64,44 @@ class AuthController extends AbstractController {
     }
   );
 
-  public forgotPassword = this.assyncWrapper.wrap(
-    this.validator.forgotPassword,
-    async (req: Request, res: Response) => {
-      const data = await this.services.forgotPassword(req, res);
+  // public forgotPassword = this.assyncWrapper.wrap(
+  //   this.validator.forgotPassword,
+  //   async (req: Request, res: Response) => {
+  //     const data = await this.services.forgotPassword(req, res);
 
-      if (data.success) {
-        res.status(200).json(data);
-      } else {
-        this.error('Sign Out error');
-      }
-    }
-  );
+  //     if (data.success) {
+  //       res.status(200).json(data);
+  //     } else {
+  //       this.error('Sign Out error');
+  //     }
+  //   }
+  // );
 
-  public verifyOTP = this.assyncWrapper.wrap(
-    this.validator.forgotPassword,
-    async (req: Request, res: Response) => {
-      const data = await this.services.verifyOTP(req, res);
+  // public verifyOTP = this.assyncWrapper.wrap(
+  //   this.validator.forgotPassword,
+  //   async (req: Request, res: Response) => {
+  //     const data = await this.services.verifyOTP(req, res);
 
-      if (data.success) {
-        res.status(200).json(data);
-      } else {
-        this.error('Sign Out error');
-      }
-    }
-  );
+  //     if (data.success) {
+  //       res.status(200).json(data);
+  //     } else {
+  //       this.error('Sign Out error');
+  //     }
+  //   }
+  // );
 
-  public resetPassword = this.assyncWrapper.wrap(
-    this.validator.resetPassword,
-    async (req: Request, res: Response) => {
-      const data = await this.services.resetPassword(req, res);
+  // public resetPassword = this.assyncWrapper.wrap(
+  //   this.validator.resetPassword,
+  //   async (req: Request, res: Response) => {
+  //     const data = await this.services.resetPassword(req, res);
 
-      if (data.success) {
-        res.status(200).json(data);
-      } else {
-        this.error('Sign Out error');
-      }
-    }
-  );
+  //     if (data.success) {
+  //       res.status(200).json(data);
+  //     } else {
+  //       this.error('Sign Out error');
+  //     }
+  //   }
+  // );
 }
 
 export default AuthController;

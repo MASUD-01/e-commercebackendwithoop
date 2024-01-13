@@ -1,9 +1,13 @@
 export interface ILogin {
-    email: string;
+    emailorPhone: string;
     password: string;
   }
   
-  export interface IRegistration extends ILogin {
-    first_name: string;
-    last_name: string;
+  export interface IRegistration {
+    email: string;
+    password: string;
+    name: string,
+    birthday?:string ,
+    phoneNumber:string ,
+    gender?: 'male'|'female' |null
   }

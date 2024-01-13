@@ -2,7 +2,7 @@ import { check } from 'express-validator';
 
 class AuthValidator {
   login = [
-    check('email').notEmpty().withMessage('Enter your email'),
+    check('emailorPhone').notEmpty().withMessage('Enter your email or Phone'),
     check('password').notEmpty().withMessage('Enter your password').isLength({
       min: 6,
     }),
@@ -15,8 +15,10 @@ class AuthValidator {
   ];
 
   signUp = [
-    check('first_name', 'First Name is required').isString(),
-    check('last_name', 'Last Name is required').isString(),
+    check('name', 'Name is required').isString(),
+    check('gender', 'gender is required').optional().isIn(['male','female']),
+    check('phoneNumber', 'phoneNumber is required').isString(),
+    check('birthday', 'birthday is required').optional(),
     check('email', 'Email is required').isEmail(),
     check('password', 'Password with 6 or more characters required').isLength({
       min: 6,

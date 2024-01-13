@@ -1,19 +1,20 @@
+
 import AbstractModels from '../../abstract/abstract.models';
 import { IRegistration } from './auth.type';
 
 class AuthModel extends AbstractModels {
-  async login(email: string) {
+  async login({emailorPhone,isEmailOrPhone}:{emailorPhone:string,isEmailOrPhone:'email'|'phone'}) {
     const [user] = await this.query()
       .select(
-        'user_id',
+        'userId',
         'email',
         'password',
-        'first_name',
-        'last_name',
-        this.db.raw("concat(first_name, ' ', last_name) AS name")
+         'name',
+         'phoneNumber',
+        // this.db.raw("concat(first_name, ' ', last_name) AS name")
       )
-      .from('users1')
-      .where({ email: email });
+      .from('user')
+      .where(isEmailOrPhone==='email'?{ email: emailorPhone }:{phoneNumber:emailorPhone});
 
     return user as {
       user_id: number;
@@ -25,15 +26,37 @@ class AuthModel extends AbstractModels {
 
   async checkExistingEmail(email: string) {
     const [result] = await this.query()
-      .select('user_id', 'email')
-      .from('users1')
+      .select('userId', 'email')
+      .from('user')
       .where({ email: email });
-    return result as { user_id: number; email: string };
+    return result as { userId: number; email: string };
+  }
+  async  validateEmailOrPhoneNumber(input:string){
+    // Regular expressions for email and phone number
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d+$/;
+  
+    // Remove leading/trailing whitespaces
+    const cleanedInput = input.trim();
+  
+    // Check if the input matches the email or phone number pattern
+    if (emailRegex.test(cleanedInput)) {
+      return 'Email';
+    } else if (phoneRegex.test(cleanedInput)) {
+      return 'Phone';
+    } 
+  }
+  async checkExistingPhoneNumber(phoneNumber: string) {
+    const [result] = await this.query()
+      .select('userId', 'phoneNumber')
+      .from('user')
+      .where({ phoneNumber: phoneNumber });
+    return result as { userId: number; email: string };
   }
 
   async signUp(userInfo: IRegistration) {
-    const [id] = await this.query().insert(userInfo).into('users1');
-    return { user_id: id } as { user_id: number };
+    const [id] = await this.query().insert(userInfo).into('user');
+    return { userId: id } as { userId: number };
   }
 
   async updateToken(user_id: number, otp: number, otp_expired: number) {
