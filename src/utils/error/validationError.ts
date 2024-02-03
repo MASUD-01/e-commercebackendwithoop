@@ -10,9 +10,11 @@ class ValidationErr extends Error implements IError {
   type: string;
 
   constructor(error: Result<ValidationError>) {
+    console.log(error,'__)0))))');
+    
     super(error.array()[0].msg);
     (this.status = 400),
-      (this.type = `Invalid input type for '${error.array()[0].msg}'`);
+      (this.type = `Invalid input type for '${error.array()[1].msg}'`);
   }
 }
 

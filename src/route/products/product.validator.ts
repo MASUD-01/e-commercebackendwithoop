@@ -2,7 +2,6 @@ import { check } from "express-validator";
 
 class ProductValidator{
     createProudct=[
-
         check('image').isString().notEmpty().withMessage('Enter your image'),
         check('name').isString().notEmpty().withMessage('Enter your name'),
         check('price').isNumeric().notEmpty().withMessage('Enter your price'),

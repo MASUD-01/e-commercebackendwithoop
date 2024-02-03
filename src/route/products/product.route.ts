@@ -11,6 +11,7 @@ class ProductRoute extends AbstractRouter {
 
       initRouters(){
         this.routers.post('/createProduct',this.productController.createProduct)
+        this.routers.get('/getProduct',this.productController.getProductList)
       }
 
 }

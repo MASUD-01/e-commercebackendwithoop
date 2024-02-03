@@ -7,6 +7,8 @@ type Func = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 type Validator = (req: Request, res: Response, next: NextFunction) => void;
 
 class AssyncWrapper {
+
+  /* ei wrap er vitor (import { check } from "express-validator"; er data) */
   public wrap(validators: Validator[], cb: Func) {
     const middleware = async (
       req: Request,
